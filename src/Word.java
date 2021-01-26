@@ -33,13 +33,22 @@ public class Word implements Comparable<Word> {
     }
 
     public void addFile(String[] files) {
-        String[] newFiles = new String[files.length + this.files.length];
-        for (int i = 0; i < this.files.length; i++)
-            newFiles[i] = this.files[i];
-        for (int i = this.files.length; i < this.files.length + files.length; i++)
-            if (!checkUniq(this.files,files[i]))
-                newFiles[i] = files[i - this.files.length];
-        this.files = newFiles;
+
+        for(int i = 0; i<files.length; i++){
+            if(!contains(files[i])){
+                String[] newFiles = new String[this.files.length+1];
+                for(int j = 0; j<this.files.length; j++)
+                    newFiles[j] = files[j];
+                newFiles[files.length] = files[i];
+            }
+        }
+    }
+
+    private boolean contains(String file){
+        for(int i = 0; i<files.length; i++){
+            if(file == files[i]) return true;
+        }
+        return false;
     }
 
     private boolean checkUniq(String[] files, String file) {
