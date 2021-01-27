@@ -38,15 +38,16 @@ public class Word implements Comparable<Word> {
             if(!contains(files[i])){
                 String[] newFiles = new String[this.files.length+1];
                 for(int j = 0; j<this.files.length; j++)
-                    newFiles[j] = files[j];
-                newFiles[files.length] = files[i];
+                    newFiles[j] = this.files[j];
+                newFiles[this.files.length] = files[i];
+                this.files = newFiles;
             }
         }
     }
 
     private boolean contains(String file){
         for(int i = 0; i<files.length; i++){
-            if(file == files[i]) return true;
+            if(file.equals(files[i])) return true;
         }
         return false;
     }
